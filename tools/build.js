@@ -45,7 +45,7 @@ function createDist(type,name,minify){
   });
 }
 
-createDist('umd',null,false);
-createDist('umd',null,true);
+createDist('umd','LeanAnalytics',false);
+createDist('umd','LeanAnalytics',true);
 createDist('var','LeanAnalytics',false);
 createDist('var','LeanAnalytics',true);
