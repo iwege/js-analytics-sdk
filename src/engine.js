@@ -9,7 +9,9 @@ export function getId(){
     }
     return id;
 }
-
+export function setLocalKey(key){
+    localKey = key;
+}
 export function pageView(analytics){
     let startTime,endTime,page;
     function start(){

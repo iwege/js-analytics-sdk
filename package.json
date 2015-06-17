@@ -6,5 +6,11 @@
     "babel-loader": "^5.1.4",
     "node-libs-browser": "^0.5.2",
     "webpack": "^1.9.11"
-  }
+  },
+  "files":[
+    "dist/analytics.umd.js",
+    "dist/analytics.umd.min.js",
+    "dist/analytics.var.js",
+    "dist/analytics.var.min.js"
+  ]
 }

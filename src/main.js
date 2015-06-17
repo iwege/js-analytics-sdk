@@ -7,7 +7,7 @@ const VERSION = '0.0.1';
 class Analytics {
     constructor(options){
         if (typeof options !== 'object') {
-            throw('AV.analytics need a argument at least.');
+            throw('LeanAnalytics need a argument at least.');
         }
         else if (!options.appId) {
             throw('Options must have appId.');
@@ -15,7 +15,11 @@ class Analytics {
         else if (!options.appKey) {
             throw('Options must have appKey.');
         }
-         // 创建一个新的实例
+        var {localKey} = options;
+        if(typeof localKey == 'string'){
+            engine.setLocalKey(localKey);
+        }
+         // 创建一个新的实例            
         var analytics = createAnalytics(options);
 
         // 启动自动页面时长统计
@@ -25,6 +29,7 @@ class Analytics {
         engine.sessionView(analytics);
         this.send = analytics.send;        
     }
+
     static _tool = tool;
     static _engine = engine;
     static version = VERSION;

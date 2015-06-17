@@ -16,8 +16,15 @@ var config = {
               }
             }
         ]
-    }
+    },
+    plugins: []
 };
+var plugins = [
+      new webpack.optimize.UglifyJsPlugin()
+    ];
+
+
+
 
 function createDist(type,name){
   var _config = JSON.parse(JSON.stringify(config));
@@ -26,6 +33,7 @@ function createDist(type,name){
     _config.output.library = name;
   }
   _config.output.libraryTarget = type;
+  _config.plugins = plugins;
   webpack(_config,function(err,result){
     if(err){
       console.error(err);

@@ -20,7 +20,7 @@ function getEventsList(options){
     if (!options || !options.event) {
         return false;
     }
-    let [event,attr,duration,tag] = options;
+    let {event,attr,duration,tag} = options;
      // 单个事件对象
     var eventObj = {
 
