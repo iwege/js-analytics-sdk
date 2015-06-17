@@ -26,22 +26,26 @@ var plugins = [
 
 
 
-function createDist(type,name){
+function createDist(type,name,minify){
   var _config = JSON.parse(JSON.stringify(config));
-  _config.output.filename = 'analytics.'+type+'.js';
+  _config.output.filename = 'analytics.'+type+ (minify?'.min':'')+'.js';
   if(name){
     _config.output.library = name;
   }
   _config.output.libraryTarget = type;
-  _config.plugins = plugins;
+  if(minify){
+    _config.plugins = plugins;
+  }
   webpack(_config,function(err,result){
     if(err){
       console.error(err);
     }else{
-      console.log(type+' done');
+      console.log(type+(minify?'.min':'')+' done');
     }
   });
 }
 
-createDist('umd');
-createDist('var','LeanAnalytics');
+createDist('umd',null,false);
+createDist('umd',null,true);
+createDist('var','LeanAnalytics',false);
+createDist('var','LeanAnalytics',true);
