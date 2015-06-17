@@ -5,7 +5,11 @@
 
 ## 与官方的差异
 ~~~
+// AMD in Browser or nwjs
 var LeanAnalytics = require('./analytics.umd'); // 也可以直接`<script src='./analytics.umd.min.js'></script>` 来使用
+// CommonJS in Eletron
+// LeanAnalytics = require('./analytics.umd').LeanAnalytics;
+
 var analytics = new  LeanAnanlytics({           //  使用的是类的方式，并非官方的函数方式
   appId     : appId,
   appKey    : appKey,
@@ -19,6 +23,7 @@ var analytics = new  LeanAnanlytics({           //  使用的是类的方式，�
 
 1. 可以通过var的方式简单引入，方式类似官方。
 2. 可以通过umd的方式适配`AMD`，`commonjs2`,`var`的模式。
+
 
 你也可以自行使用任何工具整合到你自己的模块当中，也可以对其进行扩展。
 
