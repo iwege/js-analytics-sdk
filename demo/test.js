@@ -7,7 +7,7 @@ var appId = 'u5rykzag4wz0y3h2qnbaicbcjrlft8euv27ppvvlebry9ccz';
 var appKey = 'dl9vmrtcc5z1kj8rmj4n3wq1t9u76me49hzf7aa04lxbt7i3';
 
 // 实例化分析统计功能
-var analytics = AV.analytics({
+var analytics = new LeanAnalytics({
 
     // 设置 AppId
     appId: appId,

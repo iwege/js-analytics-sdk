@@ -19,9 +19,12 @@ var config = {
     }
 };
 
-function createDist(type){
+function createDist(type,name){
   var _config = JSON.parse(JSON.stringify(config));
   _config.output.filename = 'analytics.'+type+'.js';
+  if(name){
+    _config.output.library = name;
+  }
   _config.output.libraryTarget = type;
   webpack(_config,function(err,result){
     if(err){
@@ -33,3 +36,4 @@ function createDist(type){
 }
 
 createDist('umd');
+createDist('var','LeanAnalytics');
