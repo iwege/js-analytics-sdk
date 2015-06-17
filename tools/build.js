@@ -1,0 +1,35 @@
+var webpack = require('webpack');
+var path = require('path');
+var config = {
+    entry: './src/main',
+    output: {
+        path: path.resolve(__dirname,'../dist'),
+        filename: 'analytics.amd.js',
+        libraryTarget:'amd'
+    },
+    module: {
+        loaders: [
+            { test: path.resolve(__dirname,'../src'),
+              loader: 'babel-loader',
+              query: {
+                stage: 0
+              }
+            }
+        ]
+    }
+};
+
+function createDist(type){
+  var _config = JSON.parse(JSON.stringify(config));
+  _config.output.filename = 'analytics.'+type+'.js';
+  _config.output.libraryTarget = type;
+  webpack(_config,function(err,result){
+    if(err){
+      console.error(err);
+    }else{
+      console.log(type+' done');
+    }
+  });
+}
+
+createDist('umd');
