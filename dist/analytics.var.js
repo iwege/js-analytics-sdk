@@ -421,6 +421,14 @@ var LeanAnalytics =
 /* 4 */
 /***/ function(module, exports) {
 
+	/**
+	 * UAParser.js v0.7.8
+	 * Lightweight JavaScript-based User-Agent string parser
+	 * https://github.com/faisalman/ua-parser-js
+	 *
+	 * Copyright © 2012-2015 Faisal Salman <fyzlman@gmail.com>
+	 * Dual licensed under GPLv2 & MIT
+	 */
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
