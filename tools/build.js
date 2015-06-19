@@ -49,3 +49,5 @@ createDist('umd','LeanAnalytics',false);
 createDist('umd','LeanAnalytics',true);
 createDist('var','LeanAnalytics',false);
 createDist('var','LeanAnalytics',true);
+createDist('amd',false,false);
+createDist('amd',false,true);
