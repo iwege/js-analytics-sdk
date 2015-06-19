@@ -27,11 +27,33 @@ var analytics = new  LeanAnanlytics({           //  使用的是类的方式，�
 
 你也可以自行使用任何工具整合到你自己的模块当中，也可以对其进行扩展。
 
-## 特殊事件
-1. AppOpen:`!AV!AppOpen`
-2. AppPush:`!AV!PushOpen`
-## 工具
+## 非官方暴露的特殊事件
+特殊事件，用于官方的统计，让你的应用也可以应用使用当中统计出来。
 
+### 应用打开：`!AV!AppOpen` 
+Event结构:
+~~~
+{
+  "event":"!AV!AppOpen",
+  "attr":{
+    "event_id":"_appOpen",
+    "channel":"any"
+  }
+}
+~~~
+### Push打开：`!AV!PushOpen`
+Event结构:
+~~~
+{
+  "event":"!AV!PushOpen",
+  "attr":{
+    "event_id":"_appOpenWithPush",
+    "channel":"any"
+  }
+}
+~~~
+
+## 工具
 1. babel
 2. webpack
 
