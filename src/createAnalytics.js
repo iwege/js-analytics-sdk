@@ -1,5 +1,5 @@
-import tool from './tool';
-import engine from './engine';
+import * as tool from './tool';
+import * as engine from './engine';
 import UAParser from './uaParser';
 
 let url = 'https://api.leancloud.cn/1.1/stats/open/collect';

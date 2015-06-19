@@ -1,4 +1,4 @@
-import tool from './tool';
+import * as tool from './tool';
 
 let localKey = 'leancloud-analytics-id';
 export function getId(){

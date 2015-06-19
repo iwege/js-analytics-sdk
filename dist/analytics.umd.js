@@ -64,15 +64,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	var _tool2 = __webpack_require__(1);
 
-	var _tool3 = _interopRequireDefault(_tool2);
+	var tool = _interopRequireWildcard(_tool2);
 
 	var _engine2 = __webpack_require__(2);
 
-	var _engine3 = _interopRequireDefault(_engine2);
+	var engine = _interopRequireWildcard(_engine2);
 
 	var _createAnalytics = __webpack_require__(3);
 
@@ -94,26 +96,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var localKey = options.localKey;
 
 	        if (typeof localKey == 'string') {
-	            _engine3['default'].setLocalKey(localKey);
+	            engine.setLocalKey(localKey);
 	        }
 	        // 创建一个新的实例           
 	        var analytics = (0, _createAnalytics2['default'])(options);
 
 	        // 启动自动页面时长统计
-	        _engine3['default'].pageView(analytics);
+	        engine.pageView(analytics);
 
 	        // 启动自动 session 时长统计
-	        _engine3['default'].sessionView(analytics);
+	        engine.sessionView(analytics);
 	        this.send = analytics.send;
 	    }
 
 	    _createClass(Analytics, null, [{
 	        key: '_tool',
-	        value: _tool3['default'],
+	        value: tool,
 	        enumerable: true
 	    }, {
 	        key: '_engine',
-	        value: _engine3['default'],
+	        value: engine,
 	        enumerable: true
 	    }, {
 	        key: 'version',
@@ -207,18 +209,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.pageView = pageView;
 	exports.sessionView = sessionView;
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 	var _tool = __webpack_require__(1);
 
-	var _tool2 = _interopRequireDefault(_tool);
+	var tool = _interopRequireWildcard(_tool);
 
 	var localKey = 'leancloud-analytics-id';
 
 	function getId() {
 	    var id = window.localStorage.getItem(localKey);
 	    if (!id) {
-	        id = _tool2['default'].getId();
+	        id = tool.getId();
 	        window.localStorage.setItem(key, id);
 	    }
 	    return id;
@@ -233,11 +235,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        endTime = undefined,
 	        page = undefined;
 	    function start() {
-	        startTime = _tool2['default'].now();
+	        startTime = tool.now();
 	        page = window.location.href;
 	    }
 	    function end() {
-	        endTime = _tool2['default'].now();
+	        endTime = tool.now();
 	        analytics.send({
 	            event: '_page',
 	            duration: endTime - startTime,
@@ -261,9 +263,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function sessionView(analytics) {
-	    var startTime = _tool2['default'].now();
+	    var startTime = tool.now();
 	    window.addEventListener('beforeunload', function () {
-	        var endTime = _tool2['default'].now();
+	        var endTime = tool.now();
 	        analytics.send({
 	            //必须为 _session.close 表示一次使用结束
 	            event: '_session.close',
@@ -287,13 +289,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 	var _tool = __webpack_require__(1);
 
-	var _tool2 = _interopRequireDefault(_tool);
+	var tool = _interopRequireWildcard(_tool);
 
 	var _engine = __webpack_require__(2);
 
-	var _engine2 = _interopRequireDefault(_engine);
+	var engine = _interopRequireWildcard(_engine);
 
 	var _uaParser = __webpack_require__(4);
 
@@ -358,7 +362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 分析统计接口           
 	    return {
 	        client: {
-	            id: _engine2['default'].getId(),
+	            id: engine.getId(),
 
 	            // 服务器端会统一按照小写字母校验
 	            platform: platform,
@@ -366,7 +370,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            app_channel: channel
 	        },
 	        session: {
-	            id: _tool2['default'].getId()
+	            id: tool.getId()
 	        },
 	        events: eventsList
 	    };
@@ -377,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var appKey = _ref2.appKey;
 	    var data = _ref2.data;
 
-	    _tool2['default'].ajax({
+	    tool.ajax({
 	        url: url,
 	        method: 'post',
 	        data: data,

@@ -1,5 +1,5 @@
-import tool from './tool';
-import engine from './engine';
+import * as tool from './tool';
+import * as engine from './engine';
 import createAnalytics from './createAnalytics';
 
 const VERSION = '0.0.1';
