@@ -27,6 +27,9 @@ var analytics = new  LeanAnanlytics({           //  使用的是类的方式，�
 
 你也可以自行使用任何工具整合到你自己的模块当中，也可以对其进行扩展。
 
+## 特殊事件
+1. AppOpen:`!AV!AppOpen`
+2. AppPush:`!AV!PushOpen`
 ## 工具
 
 1. babel
