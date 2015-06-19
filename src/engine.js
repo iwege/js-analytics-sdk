@@ -5,7 +5,7 @@ export function getId(){
     var id = window.localStorage.getItem(localKey);
     if(!id){
         id = tool.getId();
-        window.localStorage.setItem(key,id);
+        window.localStorage.setItem(localKey,id);
     }
     return id;
 }
