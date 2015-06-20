@@ -314,7 +314,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function format(eventsList) {
 	    var ua = getUAParser().getResult();
 	    return eventsList.map(function (event) {
-	        event.attributes = event.attr;
+	        event.attributes = event.attr || {};
 	        event.attributes.ua = ua;
 	        delete event.attr;
 	        return event;
