@@ -9,7 +9,7 @@ let _appId, _appKey, _appVersion, _appChannel, _platform;
 function format(eventsList) {
     let ua =  getUAParser().getResult();
     return eventsList.map(function(event) {
-        event.attributes = event.attr;
+        event.attributes = event.attr  || {};
         event.attributes.ua = ua; 
         delete event.attr;
         return event;
