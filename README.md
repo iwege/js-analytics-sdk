@@ -16,7 +16,8 @@ var analytics = new  LeanAnanlytics({           //  使用的是类的方式，�
   version   : '0.1.8',  // 默认为null
   channel   : 'wenxin', // 默认为null 
   platform  : 'web',    //  默认为web，由于可以使用在`eletron`或者 `nwjs`里面，这个地方你可以自定义 
-  localKey  : 'key'     //  可以修改保存的analytics的名称，默认为 lean-analytics-id
+  localKey  : 'key',    //  可以修改保存的analytics的名称，默认为 lean-analytics-id
+  isNW      : false     // 是否使用nw.js模式
 });
 ~~~
 ## 版本差异
@@ -26,6 +27,16 @@ var analytics = new  LeanAnanlytics({           //  使用的是类的方式，�
 3. 增加amd匿名模式，方便在nwjs等环境当中调用，并且不会与其他模块冲突。
 
 你也可以自行使用任何工具整合到你自己的模块当中，也可以对其进行扩展。
+
+## NW的问题
+在 `nw.js` 0.11的版本里面`window.onbeforeunload`这个事件并不会出发。
+现有的workaround是通过绑定 `Window.get().on('close')` 来处理session的问题。
+但是在`nw.js`里面有两个限定：
+
+1. 在使用之前需要`var nodeRequire = window.require`;
+2. 需要自行关闭。
+
+如果不满足需求的话，可以通过修改源码来处理。
 
 ## 非官方暴露的特殊事件
 特殊事件，用于官方的统计，让你的应用也可以应用使用当中统计出来。
