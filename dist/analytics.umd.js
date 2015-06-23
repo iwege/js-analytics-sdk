@@ -359,6 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var version = _ref.version;
 	    var channel = _ref.channel;
 
+	    version = version.toString() ? '0' : version.toString();
 	    // 分析统计接口           
 	    return {
 	        client: {
@@ -403,9 +404,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var appId = _ref3.appId;
 	    var appKey = _ref3.appKey;
 	    var _ref3$version = _ref3.version;
-	    var version = _ref3$version === undefined ? null : _ref3$version;
+	    var version = _ref3$version === undefined ? undefined : _ref3$version;
 	    var _ref3$channel = _ref3.channel;
-	    var channel = _ref3$channel === undefined ? null : _ref3$channel;
+	    var channel = _ref3$channel === undefined ? undefined : _ref3$channel;
 	    var _ref3$platform = _ref3.platform;
 	    var platform = _ref3$platform === undefined ? 'web' : _ref3$platform;
 

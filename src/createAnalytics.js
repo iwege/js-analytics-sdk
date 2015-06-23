@@ -49,6 +49,7 @@ function getEventsList(options) {
 function createData(eventsList, {
     platform = 'web', version, channel
 }) {
+    version = version.toString()? '0':version.toString();
     // 分析统计接口            
     return {
         client: {
@@ -87,7 +88,7 @@ function getUAParser() {
     return new UAParser();
 }
 export default function createAnalytics({
-    appId, appKey, version = null, channel = null, platform = 'web'
+    appId, appKey, version = undefined, channel = undefined, platform = 'web'
 }) {
     return {
         send(options, callback) {
