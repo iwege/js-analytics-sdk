@@ -86,8 +86,9 @@ function getUAParser() {
     return new UAParser();
 }
 
-export default function createAnalytics({appId, appKey, version = undefined, channel = undefined, platform = 'web',isNW:false}) {
-    return {
+export default function createAnalytics({appId, appKey, version = undefined, channel = undefined, platform = 'web',isNW = false}) {
+    var rt = {
+
         send(options, callback) {
             let eventsList = getEventsList(options);
             if (!eventsList) {
@@ -101,8 +102,9 @@ export default function createAnalytics({appId, appKey, version = undefined, cha
             return post({
                 appId, appKey, data
             }, callback);
-        },
-        isNW:isNW
+        }
+    };
+    rt.isNW = isNW;
 
-    }
+    return rt;
 }

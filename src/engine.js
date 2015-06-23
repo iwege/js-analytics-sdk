@@ -35,7 +35,7 @@ export function pageView(analytics){
         start();
     });
     if(analytics.isNW){
-        require('nw.gui').Window.get().on('close',function(){
+        nodeRequire('nw.gui').Window.get().on('close',function(){
             end();
         });
     }else{
@@ -62,7 +62,7 @@ export function sessionView(analytics){
         });
     };
     if(analytics.isNW){
-        require('nw.gui').Window.get().on('close',end);
+        nodeRequire('nw.gui').Window.get().on('close',end);
     }else{
         window.addEventListener('beforeunload',end );
     }
