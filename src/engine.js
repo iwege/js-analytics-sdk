@@ -34,18 +34,24 @@ export function pageView(analytics){
         // 再次启动新的统计
         start();
     });
-
-    // 当页面关闭的时候
-    window.addEventListener('beforeunload', function() {
-        // 发送一次
-        end();
-    });
+    if(analytics.isNW){
+        require('nw.gui').Window.get().on('close',function(){
+            end();
+        });
+    }else{
+        // 当页面关闭的时候
+        window.addEventListener('beforeunload', function() {
+            // 发送一次
+            end();
+        });    
+    }
+    
 }
 
 
 export function sessionView(analytics){
     let startTime = tool.now();
-    window.addEventListener('beforeunload', function() {
+    var end  = function() {
         let endTime = tool.now();
         analytics.send({
             //必须为 _session.close 表示一次使用结束
@@ -54,5 +60,11 @@ export function sessionView(analytics){
             // 使用时长，单位毫秒
             duration: endTime - startTime
         });
-    });
+    };
+    if(analytics.isNW){
+        require('nw.gui').Window.get().on('close',end);
+    }else{
+        window.addEventListener('beforeunload',end );
+    }
+    
 }

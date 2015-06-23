@@ -67,9 +67,7 @@ function createData(eventsList, {
     };
 }
 
-function post({
-    appId, appKey, data
-}, callback) {
+function post({appId, appKey, data}, callback) {
     tool.ajax({
         url: url,
         method: 'post',
@@ -87,9 +85,8 @@ function post({
 function getUAParser() {
     return new UAParser();
 }
-export default function createAnalytics({
-    appId, appKey, version = undefined, channel = undefined, platform = 'web'
-}) {
+
+export default function createAnalytics({appId, appKey, version = undefined, channel = undefined, platform = 'web',isNW:false}) {
     return {
         send(options, callback) {
             let eventsList = getEventsList(options);
@@ -104,7 +101,8 @@ export default function createAnalytics({
             return post({
                 appId, appKey, data
             }, callback);
-        }
+        },
+        isNW:isNW
 
     }
 }
