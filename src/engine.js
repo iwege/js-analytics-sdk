@@ -43,15 +43,14 @@ export function pageView(analytics){
         window.addEventListener('beforeunload', function() {
             // 发送一次
             end();
-        });    
+        });
     }
-    
-}
 
+}
 
 export function sessionView(analytics){
     let startTime = tool.now();
-    var end  = function() {
+    let end  = function() {
         let endTime = tool.now();
         analytics.send({
             //必须为 _session.close 表示一次使用结束
@@ -66,5 +65,5 @@ export function sessionView(analytics){
     }else{
         window.addEventListener('beforeunload',end );
     }
-    
+
 }

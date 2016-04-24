@@ -2,7 +2,7 @@ import * as tool from './tool';
 import * as engine from './engine';
 import createAnalytics from './createAnalytics';
 
-const VERSION = '0.0.1';
+const VERSION = __VERSION__;
 
 class Analytics {
     constructor(options){
@@ -19,7 +19,7 @@ class Analytics {
         if(typeof localKey == 'string'){
             engine.setLocalKey(localKey);
         }
-         // 创建一个新的实例            
+         // 创建一个新的实例
         var analytics = createAnalytics(options);
 
         // 启动自动页面时长统计
@@ -27,7 +27,7 @@ class Analytics {
 
         // 启动自动 session 时长统计
         engine.sessionView(analytics);
-        this.send = analytics.send;        
+        this.send = analytics.send;
     }
 
     static _tool = tool;

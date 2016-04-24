@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var package = require('../package.json');
 var config = {
     entry: './src/main',
     output: {
@@ -17,11 +18,11 @@ var config = {
             }
         ]
     },
-    plugins: []
+    plugins: [
+
+    ]
 };
-var plugins = [
-      new webpack.optimize.UglifyJsPlugin()
-    ];
+
 
 
 
@@ -33,8 +34,16 @@ function createDist(type,name,minify){
     _config.output.library = name;
   }
   _config.output.libraryTarget = type;
+  _config.plugins = _config.plugins.concat(new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.DefinePlugin({
+      '__VERSION__': JSON.stringify(package.version)
+  }));
   if(minify){
-    _config.plugins = plugins;
+    _config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+      },
+    }));
   }
   webpack(_config,function(err,result){
     if(err){

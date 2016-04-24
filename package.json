@@ -1,13 +1,13 @@
 {
   "name": "leancloud-js-analytics-sdk",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "devDependencies": {
     "babel-core": "^5.5.8",
     "babel-loader": "^5.1.4",
     "node-libs-browser": "^0.5.2",
     "webpack": "^1.9.11"
   },
-  "files":[
+  "files": [
     "dist/analytics.umd.js",
     "dist/analytics.umd.min.js",
     "dist/analytics.amd.js",

@@ -2,7 +2,20 @@ import * as tool from './tool';
 import * as engine from './engine';
 import UAParser from './uaParser';
 
-let url = 'https://api.leancloud.cn/1.1/stats/open/collect';
+
+// 分析统计接口
+let apiHost;
+switch (options.region) {
+  case 'us':
+     apiHost = 'us-api.leancloud.cn';
+   break;
+   // 默认中国区节点
+  default:
+       apiHost = 'api.leancloud.cn';
+   break;
+}
+let url = `https://${apiHost}/1.1/stats/open/collect`;
+
 
 let _appId, _appKey, _appVersion, _appChannel, _platform;
 
@@ -10,7 +23,7 @@ function format(eventsList) {
     let ua =  getUAParser().getResult();
     return eventsList.map(function(event) {
         event.attributes = event.attr  || {};
-        event.attributes.ua = ua; 
+        event.attributes.ua = ua;
         delete event.attr;
         return event;
     });
@@ -50,7 +63,7 @@ function createData(eventsList, {
     platform = 'web', version, channel
 }) {
     version = version.toString()? '0':version.toString();
-    // 分析统计接口            
+    // 分析统计接口
     return {
         client: {
             id: engine.getId(),
@@ -87,8 +100,7 @@ function getUAParser() {
 }
 
 export default function createAnalytics({appId, appKey, version = undefined, channel = undefined, platform = 'web',isNW = false}) {
-    var rt = {
-
+    let rt = {
         send(options, callback) {
             let eventsList = getEventsList(options);
             if (!eventsList) {

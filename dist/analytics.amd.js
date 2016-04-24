@@ -58,19 +58,19 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _tool2 = __webpack_require__(1);
+	var _tool = __webpack_require__(1);
 
-	var tool = _interopRequireWildcard(_tool2);
+	var tool = _interopRequireWildcard(_tool);
 
-	var _engine2 = __webpack_require__(2);
+	var _engine = __webpack_require__(2);
 
-	var engine = _interopRequireWildcard(_engine2);
+	var engine = _interopRequireWildcard(_engine);
 
 	var _createAnalytics = __webpack_require__(3);
 
 	var _createAnalytics2 = _interopRequireDefault(_createAnalytics);
 
-	var VERSION = '0.0.1';
+	var VERSION = ("0.1.1");
 
 	var Analytics = (function () {
 	    function Analytics(options) {
@@ -88,7 +88,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	        if (typeof localKey == 'string') {
 	            engine.setLocalKey(localKey);
 	        }
-	        // 创建一个新的实例           
+	        // 创建一个新的实例
 	        var analytics = (0, _createAnalytics2['default'])(options);
 
 	        // 启动自动页面时长统计
@@ -140,12 +140,12 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * 获取唯一一个ID
-	 * 
+	 *
 	 * @return {String}
 	 */
 
 	function getId() {
-	    return '' + prefix + '' + getIdItem() + '' + getIdItem() + '' + getIdItem();
+	    return '' + prefix + getIdItem() + getIdItem() + getIdItem();
 	}
 
 	function ajax(_ref, callback) {
@@ -168,11 +168,18 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	        xhr.setRequestHeader('X-AVOSCloud-Application-Key', appKey);
 	    }
 	    xhr.onload = function (data) {
+	        var returnData = '';
+	        // 当lean出问题的时候，不致于程序崩溃
+	        try {
+	            returnData = JSON.parse(xhr.responseText);
+	        } catch (e) {
+	            returnData = '返回结果解析错误';
+	        }
 	        // 检测认为 2xx 的返回都是成功
 	        if (xhr.status >= 200 && xhr.status < 300) {
-	            callback(null, JSON.parse(xhr.responseText));
+	            callback(null, returnData);
 	        } else {
-	            callback(JSON.parse(xhr.responseText));
+	            callback(returnData);
 	        }
 	    };
 	    xhr.onerror = function (data) {
@@ -303,7 +310,18 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 
 	var _uaParser2 = _interopRequireDefault(_uaParser);
 
-	var url = 'https://api.leancloud.cn/1.1/stats/open/collect';
+	// 分析统计接口
+	var apiHost = undefined;
+	switch (options.region) {
+	    case 'us':
+	        apiHost = 'us-api.leancloud.cn';
+	        break;
+	    // 默认中国区节点
+	    default:
+	        apiHost = 'api.leancloud.cn';
+	        break;
+	}
+	var url = 'https://' + apiHost + '/1.1/stats/open/collect';
 
 	var _appId = undefined,
 	    _appKey = undefined,
@@ -360,7 +378,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	    var channel = _ref.channel;
 
 	    version = version.toString() ? '0' : version.toString();
-	    // 分析统计接口           
+	    // 分析统计接口
 	    return {
 	        client: {
 	            id: engine.getId(),
@@ -413,7 +431,6 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	    var isNW = _ref3$isNW === undefined ? false : _ref3$isNW;
 
 	    var rt = {
-
 	        send: function send(options, callback) {
 	            var eventsList = getEventsList(options);
 	            if (!eventsList) {
@@ -450,13 +467,13 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	 */
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
 	//////////////
 	// Constants
 	/////////////
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 	var LIBVERSION = '0.7.8',
 	    EMPTY = '',
 	    UNKNOWN = '?',
@@ -486,14 +503,14 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	var util = {
 	    extend: function extend(regexes, extensions) {
 	        for (var i in extensions) {
-	            if ('browser cpu device engine os'.indexOf(i) !== -1 && extensions[i].length % 2 === 0) {
+	            if ("browser cpu device engine os".indexOf(i) !== -1 && extensions[i].length % 2 === 0) {
 	                regexes[i] = extensions[i].concat(regexes[i]);
 	            }
 	        }
 	        return regexes;
 	    },
 	    has: function has(str1, str2) {
-	        if (typeof str1 === 'string') {
+	        if (typeof str1 === "string") {
 	            return str2.toLowerCase().indexOf(str1.toLowerCase()) !== -1;
 	        } else {
 	            return false;
@@ -503,7 +520,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	        return str.toLowerCase();
 	    },
 	    major: function major(version) {
-	        return typeof version === STR_TYPE ? version.split('.')[0] : undefined;
+	        return typeof version === STR_TYPE ? version.split(".")[0] : undefined;
 	    }
 	};
 

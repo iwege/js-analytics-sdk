@@ -7,7 +7,7 @@ function getIdItem() {
 
 /**
  * 获取唯一一个ID
- * 
+ *
  * @return {String}
  */
 export function getId() {
@@ -27,11 +27,18 @@ export function ajax({url,method='get',appId,appKey,data}, callback) {
         xhr.setRequestHeader('X-AVOSCloud-Application-Key', appKey);
     }
     xhr.onload = function(data) {
+      let returnData = '';
+      // 当lean出问题的时候，不致于程序崩溃
+      try{
+        returnData = JSON.parse(xhr.responseText);
+      }catch(e){
+        returnData = '返回结果解析错误';
+      }
         // 检测认为 2xx 的返回都是成功
         if (xhr.status >= 200 && xhr.status < 300) {
-            callback(null,JSON.parse(xhr.responseText));
+            callback(null,returnData);
         } else {
-            callback(JSON.parse(xhr.responseText));
+            callback(returnData);
         }
     };
     xhr.onerror = function(data) {
