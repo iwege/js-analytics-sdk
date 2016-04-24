@@ -310,19 +310,6 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 
 	var _uaParser2 = _interopRequireDefault(_uaParser);
 
-	// 分析统计接口
-	var apiHost = undefined;
-	switch (options.region) {
-	    case 'us':
-	        apiHost = 'us-api.leancloud.cn';
-	        break;
-	    // 默认中国区节点
-	    default:
-	        apiHost = 'api.leancloud.cn';
-	        break;
-	}
-	var url = 'https://' + apiHost + '/1.1/stats/open/collect';
-
 	var _appId = undefined,
 	    _appKey = undefined,
 	    _appVersion = undefined,
@@ -398,7 +385,21 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	function post(_ref2, callback) {
 	    var appId = _ref2.appId;
 	    var appKey = _ref2.appKey;
+	    var appRegion = _ref2.appRegion;
 	    var data = _ref2.data;
+
+	    // 分析统计接口
+	    var apiHost = undefined;
+	    switch (appRegion) {
+	        case 'us':
+	            apiHost = 'us-api.leancloud.cn';
+	            break;
+	        // 默认中国区节点
+	        default:
+	            apiHost = 'api.leancloud.cn';
+	            break;
+	    }
+	    var url = 'https://' + apiHost + '/1.1/stats/open/collect';
 
 	    tool.ajax({
 	        url: url,
@@ -421,6 +422,8 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	function createAnalytics(_ref3) {
 	    var appId = _ref3.appId;
 	    var appKey = _ref3.appKey;
+	    var _ref3$region = _ref3.region;
+	    var region = _ref3$region === undefined ? 'cn' : _ref3$region;
 	    var _ref3$version = _ref3.version;
 	    var version = _ref3$version === undefined ? undefined : _ref3$version;
 	    var _ref3$channel = _ref3.channel;
@@ -442,7 +445,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	                platform: platform, version: version, channel: channel
 	            });
 	            return post({
-	                appId: appId, appKey: appKey, data: data
+	                appId: appId, appKey: appKey, region: region, data: data
 	            }, callback);
 	        }
 	    };

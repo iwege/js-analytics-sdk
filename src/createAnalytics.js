@@ -3,18 +3,7 @@ import * as engine from './engine';
 import UAParser from './uaParser';
 
 
-// 分析统计接口
-let apiHost;
-switch (options.region) {
-  case 'us':
-     apiHost = 'us-api.leancloud.cn';
-   break;
-   // 默认中国区节点
-  default:
-       apiHost = 'api.leancloud.cn';
-   break;
-}
-let url = `https://${apiHost}/1.1/stats/open/collect`;
+
 
 
 let _appId, _appKey, _appVersion, _appChannel, _platform;
@@ -80,7 +69,20 @@ function createData(eventsList, {
     };
 }
 
-function post({appId, appKey, data}, callback) {
+function post({appId, appKey,appRegion, data}, callback) {
+  // 分析统计接口
+  let apiHost;
+  switch (appRegion) {
+    case 'us':
+       apiHost = 'us-api.leancloud.cn';
+     break;
+     // 默认中国区节点
+    default:
+         apiHost = 'api.leancloud.cn';
+     break;
+  }
+  let url = `https://${apiHost}/1.1/stats/open/collect`;
+
     tool.ajax({
         url: url,
         method: 'post',
@@ -99,7 +101,7 @@ function getUAParser() {
     return new UAParser();
 }
 
-export default function createAnalytics({appId, appKey, version = undefined, channel = undefined, platform = 'web',isNW = false}) {
+export default function createAnalytics({appId, appKey,region= 'cn', version = undefined, channel = undefined, platform = 'web',isNW = false}) {
     let rt = {
         send(options, callback) {
             let eventsList = getEventsList(options);
@@ -112,7 +114,7 @@ export default function createAnalytics({appId, appKey, version = undefined, cha
                 platform, version, channel
             });
             return post({
-                appId, appKey, data
+                appId, appKey, region,data
             }, callback);
         }
     };
