@@ -1,8 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 var package = require('../package.json');
+let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 var config = {
-    entry: './src/main',
+    entry: './src/index',
     output: {
         path: path.resolve(__dirname,'../dist'),
         filename: 'analytics.amd.js',
@@ -11,10 +12,7 @@ var config = {
     module: {
         loaders: [
             { test: path.resolve(__dirname,'../src'),
-              loader: 'babel-loader',
-              query: {
-                stage: 0
-              }
+              loader: 'babel-loader'
             }
         ]
     },
@@ -34,14 +32,16 @@ function createDist(type,name,minify){
     _config.output.library = name;
   }
   _config.output.libraryTarget = type;
-  _config.plugins = _config.plugins.concat(new webpack.optimize.OccurenceOrderPlugin(),
+  _config.plugins = _config.plugins.concat(
   new webpack.DefinePlugin({
       '__VERSION__': JSON.stringify(package.version)
   }));
   if(minify){
-    _config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    _config.plugins.push(new UglifyJSPlugin({
       compressor: {
         warnings: false,
+        drop_console:true,
+        unused:true
       },
     }));
   }

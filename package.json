@@ -1,11 +1,18 @@
 {
   "name": "leancloud-js-analytics-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "main": "./src/index",
+  "scripts": {
+    "dist": "node ./tools/build.js"
+  },
   "devDependencies": {
-    "babel-core": "^5.5.8",
-    "babel-loader": "^5.1.4",
-    "node-libs-browser": "^0.5.2",
-    "webpack": "^1.9.11"
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.22.0",
+    "ua-parser-js": "^0.7.12",
+    "uglifyjs-webpack-plugin": "^0.1.4",
+    "webpack": "^2.2.1"
   },
   "files": [
     "dist/analytics.umd.js",

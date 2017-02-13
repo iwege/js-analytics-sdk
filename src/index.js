@@ -5,22 +5,22 @@ import createAnalytics from './createAnalytics';
 const VERSION = __VERSION__;
 
 class Analytics {
-    constructor(options){
+    constructor(options) {
         if (typeof options !== 'object') {
-            throw('LeanAnalytics need a argument at least.');
+            throw ('LeanAnalytics need a argument at least.');
         }
         else if (!options.appId) {
-            throw('Options must have appId.');
+            throw ('Options must have appId.');
         }
         else if (!options.appKey) {
-            throw('Options must have appKey.');
+            throw ('Options must have appKey.');
         }
-        var {localKey} = options;
-        if(typeof localKey == 'string'){
+        let {localKey} = options;
+        if (typeof localKey == 'string') {
             engine.setLocalKey(localKey);
         }
-         // 创建一个新的实例
-        var analytics = createAnalytics(options);
+        // 创建一个新的实例
+        let analytics = createAnalytics(options);
 
         // 启动自动页面时长统计
         engine.pageView(analytics);

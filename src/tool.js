@@ -10,11 +10,11 @@ function getIdItem() {
  *
  * @return {String}
  */
-export function getId() {
+export function getId(): string {
     return `${prefix}${getIdItem()}${getIdItem()}${getIdItem()}`;
 }
 
-export function ajax({url,method='get',appId,appKey,data}, callback) {
+export function ajax({url, method = 'get', appId, appKey, data}, callback) {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     if (method === 'post' || method === 'put') {
@@ -26,27 +26,27 @@ export function ajax({url,method='get',appId,appKey,data}, callback) {
     if (appKey) {
         xhr.setRequestHeader('X-AVOSCloud-Application-Key', appKey);
     }
-    xhr.onload = function(data) {
-      let returnData = '';
-      // 当lean出问题的时候，不致于程序崩溃
-      try{
-        returnData = JSON.parse(xhr.responseText);
-      }catch(e){
-        returnData = '返回结果解析错误';
-      }
+    xhr.onload = function (data) {
+        let returnData = '';
+        // 当lean出问题的时候，不致于程序崩溃
+        try {
+            returnData = JSON.parse(xhr.responseText);
+        } catch (e) {
+            returnData = '返回结果解析错误';
+        }
         // 检测认为 2xx 的返回都是成功
         if (xhr.status >= 200 && xhr.status < 300) {
-            callback(null,returnData);
+            callback(null, returnData);
         } else {
             callback(returnData);
         }
     };
-    xhr.onerror = function(data) {
+    xhr.onerror = function (data) {
         callback(new Error('Network error'), data);
     };
     xhr.send(JSON.stringify(data));
 }
 
-export function now(){
+export function now() {
     return Date.now();
 }

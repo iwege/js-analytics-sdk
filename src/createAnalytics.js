@@ -1,10 +1,6 @@
 import * as tool from './tool';
 import * as engine from './engine';
-import UAParser from './uaParser';
-
-
-
-
+import UAParser from 'ua-parser-js';
 
 let _appId, _appKey, _appVersion, _appChannel, _platform;
 
